@@ -1,4 +1,105 @@
+@import "variables";
+
+h1, h2, h3, h4, h5, h6, ul, p {
+	padding: 0;
+	margin: 0;
+}
+button {
+	padding: 0;
+	border:none;
+	line-height: 1;
+	background-color: transparent;
+	&:focus {
+		outline: none;
+	}
+}
+img {
+	vertical-align: bottom;
+}
+ul {
+  list-style-type: none;
+}
+body {
+	font-family: "Raleway", sans-serif;
+}
+
 .wrapper {
   display: flex;
   justify-content: space-between;
+  max-width: 1400px;
+  padding: 0 20px;
+  margin: 100px auto 0;
+  box-sizing: border-box;
+}
+.gallows {
+  &__hangman {
+    font-size: 50px;
+    font-weight: 800;
+  }
+}
+.game {
+  text-align: center;
+}
+.hint {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.secret {
+  display: flex;
+  justify-content: center;
+  font-size: 90px;
+  gap: 50px;
+  margin-bottom: 30px;
+}
+.guesses {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 50px;
+  &__number {
+    font-family: sans-serif;
+    color: $mistakes;
+  }
+}
+.grid {
+  display: grid;
+  gap: 10px;
+  grid-template-areas: "a a b b c c d d e e f f g g h h i i"
+                       "j j k k l l m m n n o o p p q q r r"
+                       ". s s t t u u v v w w x x y y z z .";
+  &__item {
+    font-size: 28px;
+    font-weight: 700;
+    padding: 15px 0;
+    width: 74px;
+    background-color: $btn-back;
+    border-radius: 10px;
+    color: white;
+    &-1 {grid-area: a;}
+    &-2 {grid-area: b;}
+    &-3 {grid-area: c;}
+    &-4 {grid-area: d;}
+    &-5 {grid-area: e;}
+    &-6 {grid-area: f;}
+    &-7 {grid-area: g;}
+    &-8 {grid-area: h;}
+    &-9 {grid-area: i;}
+    &-10 {grid-area: j;}
+    &-11 {grid-area: k;}
+    &-12 {grid-area: l;}
+    &-13 {grid-area: m;}
+    &-14 {grid-area: n;}
+    &-15 {grid-area: o;}
+    &-16 {grid-area: p;}
+    &-17 {grid-area: q;}
+    &-18 {grid-area: r;}
+    &-19 {grid-area: s;}
+    &-20 {grid-area: t;}
+    &-21 {grid-area: u;}
+    &-22 {grid-area: v;}
+    &-23 {grid-area: w;}
+    &-24 {grid-area: x;}
+    &-25 {grid-area: y;}
+    &-26 {grid-area: z;}
+  }
 }

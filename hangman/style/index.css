@@ -1,6 +1,163 @@
+h1, h2, h3, h4, h5, h6, ul, p {
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  padding: 0;
+  border: none;
+  line-height: 1;
+  background-color: transparent;
+}
+button:focus {
+  outline: none;
+}
+
+img {
+  vertical-align: bottom;
+}
+
+ul {
+  list-style-type: none;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+}
+
 .wrapper {
   display: flex;
   justify-content: space-between;
+  max-width: 1400px;
+  padding: 0 20px;
+  margin: 100px auto 0;
+  box-sizing: border-box;
+}
+
+.gallows__hangman {
+  font-size: 50px;
+  font-weight: 800;
+}
+
+.game {
+  text-align: center;
+}
+
+.hint {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.secret {
+  display: flex;
+  justify-content: center;
+  font-size: 90px;
+  gap: 50px;
+  margin-bottom: 30px;
+}
+
+.guesses {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 50px;
+}
+.guesses__number {
+  font-family: sans-serif;
+  color: #FE0020;
+}
+
+.grid {
+  display: grid;
+  gap: 10px;
+  grid-template-areas: "a a b b c c d d e e f f g g h h i i" "j j k k l l m m n n o o p p q q r r" ". s s t t u u v v w w x x y y z z .";
+}
+.grid__item {
+  font-size: 28px;
+  font-weight: 700;
+  padding: 15px 0;
+  width: 74px;
+  background-color: #5455AC;
+  border-radius: 10px;
+  color: white;
+}
+.grid__item-1 {
+  grid-area: a;
+}
+.grid__item-2 {
+  grid-area: b;
+}
+.grid__item-3 {
+  grid-area: c;
+}
+.grid__item-4 {
+  grid-area: d;
+}
+.grid__item-5 {
+  grid-area: e;
+}
+.grid__item-6 {
+  grid-area: f;
+}
+.grid__item-7 {
+  grid-area: g;
+}
+.grid__item-8 {
+  grid-area: h;
+}
+.grid__item-9 {
+  grid-area: i;
+}
+.grid__item-10 {
+  grid-area: j;
+}
+.grid__item-11 {
+  grid-area: k;
+}
+.grid__item-12 {
+  grid-area: l;
+}
+.grid__item-13 {
+  grid-area: m;
+}
+.grid__item-14 {
+  grid-area: n;
+}
+.grid__item-15 {
+  grid-area: o;
+}
+.grid__item-16 {
+  grid-area: p;
+}
+.grid__item-17 {
+  grid-area: q;
+}
+.grid__item-18 {
+  grid-area: r;
+}
+.grid__item-19 {
+  grid-area: s;
+}
+.grid__item-20 {
+  grid-area: t;
+}
+.grid__item-21 {
+  grid-area: u;
+}
+.grid__item-22 {
+  grid-area: v;
+}
+.grid__item-23 {
+  grid-area: w;
+}
+.grid__item-24 {
+  grid-area: x;
+}
+.grid__item-25 {
+  grid-area: y;
+}
+.grid__item-26 {
+  grid-area: z;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -9,8 +9,9 @@ gallowsImg.classList.add("gallows__pic");
 gallowsImg.alt = "gallows";
 gallowsImg.src = "img/gallows.svg";
 
-const hangman = document.createElement("p");
+const hangman = document.createElement("h1");
 hangman.classList.add("gallows__hangman");
+hangman.append("HANGMAN GAME");
 
 const game = document.createElement("div");
 game.classList.add("game");
@@ -18,11 +19,26 @@ game.classList.add("game");
 const secret = document.createElement("ul");
 secret.classList.add("secret");
 
+for (let i = 0; i < 6; i += 1) {
+  const secretLetter = document.createElement("li");
+  secretLetter.classList.add("secret__letter");
+  secretLetter.append("_");
+  secret.append(secretLetter);
+}
+
 const hint = document.createElement("p");
 hint.classList.add("hint");
+hint.append("Hint: A human-powered vehicle with two wheels");
 
 const guesses = document.createElement("p");
 guesses.classList.add("guesses");
+guesses.append("Incorrect guesses: ");
+
+const guessesNumber = document.createElement("span");
+guessesNumber.classList.add("guesses__number");
+guessesNumber.append("0 / 6");
+
+guesses.append(guessesNumber);
 
 const keyboard = document.createElement("div");
 keyboard.classList.add("grid");
@@ -59,6 +75,7 @@ const alhabet = [
 for (let i = 0; i < 26; i += 1) {
   const letter = document.createElement("button");
   letter.classList.add("grid__item");
+  letter.classList.add(`grid__item-${i + 1}`);
   letter.append(alhabet[i]);
   keyboard.append(letter);
 }
