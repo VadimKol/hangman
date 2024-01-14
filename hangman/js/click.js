@@ -5,7 +5,7 @@ const modalNewBtnClick = document.querySelector(".modal__new-btn");
 
 // взял из core-js-numbers, случайное число от мин до макс включительно
 // генерация на самом деле дерьмовая!, надо будет править
-// ИЗ ЗА ЕБАНОГО ЕСЛИНТА ПРИХОДИТЬСЯ ТАК ПИСАТЬ!!!!!!!!!!!!
+// еслинт и модули, пришлось так сделать :((
 function getRandomInteger(min, max) {
   return (Math.trunc(Math.random() * 10) % (max - min + 1)) + min;
 }
@@ -149,7 +149,7 @@ function closeModal() {
   );
 
   window.currentPair =
-    window.hangmanPairs[getRandomInteger(0, window.hangmanPairs.length)];
+    window.hangmanPairs[getRandomInteger(0, window.hangmanPairs.length - 1)];
 
   // меняем подсказку и количество подчеркиваний
   const secret = document.querySelector(".secret");
