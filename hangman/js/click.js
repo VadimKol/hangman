@@ -1,5 +1,5 @@
 const keyboardClick = document.querySelector(".grid");
-const gallowsClick = document.querySelector(".gallows");
+const gallowsClick = document.querySelector(".main-pic");
 const modalClick = document.querySelector(".modal-back");
 const modalNewBtnClick = document.querySelector(".modal__new-btn");
 
@@ -82,6 +82,7 @@ function mainLogic(btn) {
     if (window.fails === 6) {
       const result = document.querySelector(".modal__result");
       result.innerText = "LOSE";
+      document.body.classList.toggle("overflow-body");
       modalClick.classList.toggle("modal-back_show");
     }
   } else {
@@ -100,6 +101,7 @@ function mainLogic(btn) {
     if (window.currentPair.answer === answerUser) {
       const result = document.querySelector(".modal__result");
       result.innerText = "WIN!!!";
+      document.body.classList.toggle("overflow-body");
       modalClick.classList.toggle("modal-back_show");
     }
   }
@@ -168,6 +170,8 @@ function closeModal() {
   const answer = document.querySelector(".modal__answer");
   answer.innerHTML = "";
   answer.append(window.currentPair.answer);
+
+  document.body.classList.toggle("overflow-body");
 }
 
 // дурацкий код из за eslinta !!!!!!!!!! функция у него не используется!!!!!

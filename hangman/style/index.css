@@ -32,9 +32,13 @@ body {
   padding: 0 20px;
   margin: 100px auto 0;
   box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .gallows {
+  max-width: 415px;
+}
+.gallows .main-pic {
   position: relative;
 }
 .gallows__hangman {
@@ -74,7 +78,7 @@ body {
 
 .game {
   text-align: center;
-  max-width: 720px;
+  max-width: 750px;
 }
 
 .hint {
@@ -195,9 +199,8 @@ body {
 }
 
 .modal-back {
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
   width: 100vw;
   height: 100vh;
   display: none;
@@ -245,6 +248,10 @@ body {
   background-color: #8888c5;
   pointer-events: none;
   user-select: none;
+}
+
+.overflow-body {
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=index.css.map */

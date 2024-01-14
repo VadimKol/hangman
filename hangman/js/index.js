@@ -62,10 +62,15 @@ wrapper.classList.add("wrapper");
 const gallows = document.createElement("div");
 gallows.classList.add("gallows");
 
+const mainPic = document.createElement("div");
+mainPic.classList.add("main-pic");
+
 const gallowsImg = document.createElement("img");
 gallowsImg.classList.add("gallows__pic");
 gallowsImg.alt = "gallows";
 gallowsImg.src = "img/gallows.svg";
+
+mainPic.append(gallowsImg);
 
 const hangman = document.createElement("h1");
 hangman.classList.add("gallows__hangman");
@@ -141,7 +146,7 @@ for (let i = 0; i < 26; i += 1) {
 document.body.append(wrapper);
 wrapper.append(gallows);
 wrapper.append(game);
-gallows.append(gallowsImg);
+gallows.append(mainPic);
 gallows.append(hangman);
 game.append(secret);
 game.append(hint);
@@ -182,4 +187,5 @@ modal.append(playAgainBtn);
 
 modalBack.append(modal);
 
-wrapper.append(modalBack);
+document.body.append(modalBack);
+// wrapper.append(modalBack);
