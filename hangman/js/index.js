@@ -41,6 +41,8 @@ const hangmanPairs = [
   },
 ];
 
+window.hangmanPairs = hangmanPairs; // это оч плохой код, исправлю потом может
+
 // взял из core-js-numbers, случайное число от мин до макс включительно
 // генерация на самом деле дерьмовая!, надо будет править
 function getRandomInteger(min, max) {
@@ -48,8 +50,9 @@ function getRandomInteger(min, max) {
 }
 
 // так, это важная переменная, здесь вопрос и ответ!
-const currentPair = hangmanPairs[getRandomInteger(0, 9)];
+const currentPair = hangmanPairs[getRandomInteger(0, hangmanPairs.length)];
 
+window.currentPair = currentPair;
 // это ошибки, когда нажимаем неправильно, глобал счетчик
 window.fails = 0;
 
@@ -131,6 +134,7 @@ for (let i = 0; i < 26; i += 1) {
   const letter = document.createElement("button");
   letter.classList.add("grid__item");
   letter.classList.add(`grid__item-${i + 1}`);
+  letter.type = "button";
   letter.append(alhabet[i]);
   keyboard.append(letter);
 }
@@ -144,6 +148,7 @@ game.append(hint);
 game.append(guesses);
 game.append(keyboard);
 
+// модалка
 const modalBack = document.createElement("div");
 modalBack.classList.add("modal-back");
 
@@ -170,7 +175,9 @@ modal.append(secretWord);
 
 const playAgainBtn = document.createElement("button");
 playAgainBtn.classList.add("modal__new-btn");
+playAgainBtn.type = "button";
 playAgainBtn.append("Play again");
+// playAgainBtn.setAttribute("onclick", "closeModal()"); // ESLINT!!!!!!!!
 modal.append(playAgainBtn);
 
 modalBack.append(modal);
