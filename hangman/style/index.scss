@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import "variables";
 
 h1, h2, h3, h4, h5, h6, ul, p {
@@ -32,13 +33,45 @@ body {
   box-sizing: border-box;
 }
 .gallows {
+  position: relative;
   &__hangman {
     font-size: 50px;
     font-weight: 800;
   }
+  &__head {
+    position: absolute;
+    top: 149px;
+    left: 253px;
+  }
+  &__body {
+    position: absolute;
+    top: 250px;
+    left: 302px;
+  }
+  &__left-arm {
+    position: absolute;
+    top: 249px;
+    left: 237px;
+  }
+  &__right-arm {
+    position: absolute;
+    top: 249px;
+    left: 305px;
+  }
+  &__left-leg {
+    position: absolute;
+    top: 378px;
+    left: 238px;
+  }
+  &__right-leg {
+    position: absolute;
+    top: 378px;
+    left: 303px;
+  }
 }
 .game {
   text-align: center;
+  max-width: 720px;
 }
 .hint {
   font-size: 32px;
@@ -102,4 +135,57 @@ body {
     &-25 {grid-area: y;}
     &-26 {grid-area: z;}
   }
+}
+
+.modal-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  background-color: rgba(64, 63, 61, 0.80);
+  &_show {
+    display: block;
+  }
+}
+.modal {
+  background-color: white;
+  border-radius: 40px;
+  margin: auto;
+  max-width: 800px;
+  max-height: min-content;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 16px;
+  text-align: center;
+  font-size: 50px;
+  &__msg {
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  &__secret {
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  &__answer {
+    color: greenyellow;
+  }
+  &__new-btn {
+    padding: 15px;
+    border-radius: 50px;
+    background-color: $btn-back;
+    color: white;
+  }
+}
+
+// js logic
+.disable-btn {
+  background-color: lighten($btn-back, 15%);
+  pointer-events: none;
+  user-select: none;
 }

@@ -34,13 +34,47 @@ body {
   box-sizing: border-box;
 }
 
+.gallows {
+  position: relative;
+}
 .gallows__hangman {
   font-size: 50px;
   font-weight: 800;
 }
+.gallows__head {
+  position: absolute;
+  top: 149px;
+  left: 253px;
+}
+.gallows__body {
+  position: absolute;
+  top: 250px;
+  left: 302px;
+}
+.gallows__left-arm {
+  position: absolute;
+  top: 249px;
+  left: 237px;
+}
+.gallows__right-arm {
+  position: absolute;
+  top: 249px;
+  left: 305px;
+}
+.gallows__left-leg {
+  position: absolute;
+  top: 378px;
+  left: 238px;
+}
+.gallows__right-leg {
+  position: absolute;
+  top: 378px;
+  left: 303px;
+}
 
 .game {
   text-align: center;
+  max-width: 720px;
 }
 
 .hint {
@@ -158,6 +192,59 @@ body {
 }
 .grid__item-26 {
   grid-area: z;
+}
+
+.modal-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  background-color: rgba(64, 63, 61, 0.8);
+}
+.modal-back_show {
+  display: block;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 40px;
+  margin: auto;
+  max-width: 800px;
+  max-height: min-content;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 16px;
+  text-align: center;
+  font-size: 50px;
+}
+.modal__msg {
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.modal__secret {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.modal__answer {
+  color: greenyellow;
+}
+.modal__new-btn {
+  padding: 15px;
+  border-radius: 50px;
+  background-color: #5455AC;
+  color: white;
+}
+
+.disable-btn {
+  background-color: #8888c5;
+  pointer-events: none;
+  user-select: none;
 }
 
 /*# sourceMappingURL=index.css.map */
