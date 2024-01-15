@@ -1,21 +1,8 @@
+import { getRandomInteger, isMistake, destroyModal } from "./helper.js";
+
 const keyboardClick = document.querySelector(".grid");
 const gallowsClick = document.querySelector(".main-pic");
 let fixEsLintfunc;
-
-// еслинт и модули, пришлось так сделать :((
-function getRandomInteger(min, max) {
-  return (Math.trunc(Math.random() * 10) % (max - min + 1)) + min;
-}
-
-function isMistake(char) {
-  // true, если ошибка, то есть буквы нет в слове
-  return !window.currentPair.answer.includes(char);
-}
-
-function destroyModal() {
-  const modalBack = document.querySelector(".modal-back");
-  modalBack.remove();
-}
 
 function closeModal() {
   // закрываем модалку
@@ -73,6 +60,8 @@ function closeModal() {
 
   document.body.classList.toggle("overflow-body");
 }
+
+window.closeModal = closeModal;
 
 function createModal(winLose) {
   const modalBack = document.createElement("div");

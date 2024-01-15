@@ -1,98 +1,10 @@
-const hangmanPairs = [
-  {
-    hint: "A human-powered vehicle with two wheels",
-    answer: "bicycle",
-  },
-  {
-    hint: "Capital of Finland",
-    answer: "helsinki",
-  },
-  {
-    hint: "Smallest planet in our solar system",
-    answer: "mercury",
-  },
-  {
-    hint: "Gordon Sumner is the real name of what famous British musician",
-    answer: "sting",
-  },
-  {
-    hint: "Which colour pill does Neo swallow in The Matrix",
-    answer: "red",
-  },
-  {
-    hint: "A screwdriver cocktail is orange juice, ice and which spirit",
-    answer: "vodka",
-  },
-  {
-    hint: "Capital city of Australia",
-    answer: "canberra",
-  },
-  {
-    hint: "What part of a plant conducts photosynthesis",
-    answer: "leaf",
-  },
-  {
-    hint: "What company is also the name of one of the longest rivers in the world",
-    answer: "amazon",
-  },
-  {
-    hint: "How many planets are in our solar system",
-    answer: "eight",
-  },
-  {
-    hint: "Which operating system does a Google Pixel phone use",
-    answer: "android",
-  },
-  {
-    hint: "Elon Musk is the CEO of which global automotive brand",
-    answer: "tesla",
-  },
-  {
-    hint: "Director Taika Waititi plays which comedic character first introduced in Thor Ragnarok",
-    answer: "korg",
-  },
-  {
-    hint: "Who did John Boyega play in the most recent Star Wars films",
-    answer: "finn",
-  },
-  {
-    hint: "How many fingers do Simpsons characters have",
-    answer: "four",
-  },
-  {
-    hint: "What’s Marge Simpson maiden name",
-    answer: "bouvier",
-  },
-  {
-    hint: "A boxer Muhammed Ali was born in which US state",
-    answer: "kentucky",
-  },
-  {
-    hint: "Hanoi is the capital of which country",
-    answer: "vietnam",
-  },
-  {
-    hint: "Beirut is the capital of which country",
-    answer: "lebanon",
-  },
-  {
-    hint: "In which country would you find the original Legoland",
-    answer: "denmark",
-  },
-];
+import hangmanPairs from "../pairs.json" assert { type: "json" };
+import { getRandomInteger } from "./helper.js";
 
 window.hangmanPairs = hangmanPairs; // это оч плохой код, исправлю потом может
 
-// взял из core-js-numbers, случайное число от мин до макс включительно
-// генерация на самом деле дерьмовая!, надо будет править
-function getRandomInteger(min, max) {
-  return (Math.trunc(Math.random() * 10) % (max - min + 1)) + min;
-}
-
 // так, это важная переменная, здесь вопрос и ответ!
-const currentPair = hangmanPairs[getRandomInteger(0, hangmanPairs.length)];
-
-window.currentPair = currentPair;
+window.currentPair = hangmanPairs[getRandomInteger(0, hangmanPairs.length)];
 
 console.log("Use English keyboard layout!");
 
@@ -127,7 +39,7 @@ game.classList.add("game");
 const secret = document.createElement("ul");
 secret.classList.add("secret");
 
-for (let i = 0; i < currentPair.answer.length; i += 1) {
+for (let i = 0; i < window.currentPair.answer.length; i += 1) {
   const secretLetter = document.createElement("li");
   secretLetter.classList.add("secret__letter");
   secretLetter.append("_");
@@ -136,7 +48,7 @@ for (let i = 0; i < currentPair.answer.length; i += 1) {
 
 const hint = document.createElement("p");
 hint.classList.add("hint");
-hint.append(`Hint: ${currentPair.hint}`);
+hint.append(`Hint: ${window.currentPair.hint}`);
 
 const guesses = document.createElement("p");
 guesses.classList.add("guesses");
@@ -188,11 +100,15 @@ for (let i = 0; i < 26; i += 1) {
   letter.append(alhabet[i]);
   keyboard.append(letter);
 }
+
 document.body.append(wrapper);
+
 wrapper.append(gallows);
 wrapper.append(game);
+
 gallows.append(mainPic);
 gallows.append(hangman);
+
 game.append(secret);
 game.append(hint);
 game.append(guesses);
