@@ -94,6 +94,8 @@ const currentPair = hangmanPairs[getRandomInteger(0, hangmanPairs.length)];
 
 window.currentPair = currentPair;
 
+console.log("Use English keyboard layout!");
+
 console.log(`Answer is ${window.currentPair.answer}`);
 
 // это ошибки, когда нажимаем неправильно, глобал счетчик

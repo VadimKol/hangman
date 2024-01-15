@@ -1,5 +1,6 @@
 const keyboardClick = document.querySelector(".grid");
 const gallowsClick = document.querySelector(".main-pic");
+let fixEsLintfunc;
 
 // еслинт и модули, пришлось так сделать :((
 function getRandomInteger(min, max) {
@@ -19,6 +20,8 @@ function destroyModal() {
 function closeModal() {
   // закрываем модалку
   destroyModal();
+  // physical keyboard
+  document.addEventListener("keyup", fixEsLintfunc);
 
   window.fails = 0; // обнуляем счетчик ошибок
   document.querySelector(".guesses__number").innerText = `${window.fails} / 6`;
@@ -55,7 +58,7 @@ function closeModal() {
 
   // меняем подсказку и количество подчеркиваний
   const secret = document.querySelector(".secret");
-  secret.innerHTML = "";
+  secret.replaceChildren();
 
   for (let i = 0; i < window.currentPair.answer.length; i += 1) {
     const secretLetter = document.createElement("li");
@@ -174,6 +177,7 @@ function mainLogic(btn) {
 
     if (window.fails === 6) {
       document.body.classList.toggle("overflow-body");
+      document.removeEventListener("keyup", fixEsLintfunc);
       createModal("LOSE");
     }
   } else {
@@ -191,11 +195,29 @@ function mainLogic(btn) {
     // и в случае, если угадал верно, показываем модалку с успехом
     if (window.currentPair.answer === answerUser) {
       document.body.classList.toggle("overflow-body");
+      document.removeEventListener("keyup", fixEsLintfunc);
       createModal("WIN!!!");
     }
   }
 }
 
+function physKeyboardLogic(event) {
+  const keyCode = event.key.toLowerCase();
+
+  if (
+    keyCode.length === 1 &&
+    keyCode.charCodeAt(0) - 96 >= 1 &&
+    keyCode.charCodeAt(0) - 96 <= 26
+  ) {
+    // это буква, а не другая клавиша
+    const button = document.querySelector(
+      `.grid__item-${keyCode.charCodeAt(0) - 96}`,
+    );
+    if (!button.classList.contains("disable-btn")) mainLogic(button);
+  }
+}
+fixEsLintfunc = physKeyboardLogic;
+// virtual keyboard
 keyboardClick.onclick = (event) => {
   // делегируем событие с клавиатуры на кнопки
   const button = event.target;
@@ -204,3 +226,6 @@ keyboardClick.onclick = (event) => {
 
   if (!button.classList.contains("disable-btn")) mainLogic(button);
 };
+
+// physical keyboard
+document.addEventListener("keyup", physKeyboardLogic);
