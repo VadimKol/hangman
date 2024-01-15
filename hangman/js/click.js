@@ -1,10 +1,6 @@
 const keyboardClick = document.querySelector(".grid");
 const gallowsClick = document.querySelector(".main-pic");
-const modalClick = document.querySelector(".modal-back");
-const modalNewBtnClick = document.querySelector(".modal__new-btn");
 
-// взял из core-js-numbers, случайное число от мин до макс включительно
-// генерация на самом деле дерьмовая!, надо будет править
 // еслинт и модули, пришлось так сделать :((
 function getRandomInteger(min, max) {
   return (Math.trunc(Math.random() * 10) % (max - min + 1)) + min;
@@ -13,6 +9,103 @@ function getRandomInteger(min, max) {
 function isMistake(char) {
   // true, если ошибка, то есть буквы нет в слове
   return !window.currentPair.answer.includes(char);
+}
+
+function destroyModal() {
+  const modalBack = document.querySelector(".modal-back");
+  modalBack.remove();
+}
+
+function closeModal() {
+  // закрываем модалку
+  destroyModal();
+
+  window.fails = 0; // обнуляем счетчик ошибок
+  document.querySelector(".guesses__number").innerText = `${window.fails} / 6`;
+
+  // убираем челобрека
+  const head = document.querySelector(".gallows__head");
+  const body = document.querySelector(".gallows__body");
+  const leftArm = document.querySelector(".gallows__left-arm");
+  const rightArm = document.querySelector(".gallows__right-arm");
+  const leftLeg = document.querySelector(".gallows__left-leg");
+  const rightLeg = document.querySelector(".gallows__right-leg");
+
+  if (head !== null) head.remove();
+  if (body !== null) body.remove();
+  if (leftArm !== null) leftArm.remove();
+  if (rightArm !== null) rightArm.remove();
+  if (leftLeg !== null) leftLeg.remove();
+  if (rightLeg !== null) rightLeg.remove();
+
+  // восстанавлием клавиатуру
+  while (document.querySelector(".disable-btn") !== null) {
+    document.querySelector(".disable-btn").classList.toggle("disable-btn");
+  }
+
+  // генерим новый вопрос
+  window.hangmanPairs = window.hangmanPairs.filter(
+    (pair) => pair !== window.currentPair,
+  );
+
+  window.currentPair =
+    window.hangmanPairs[getRandomInteger(0, window.hangmanPairs.length - 1)];
+
+  console.log(`Answer is ${window.currentPair.answer}`);
+
+  // меняем подсказку и количество подчеркиваний
+  const secret = document.querySelector(".secret");
+  secret.innerHTML = "";
+
+  for (let i = 0; i < window.currentPair.answer.length; i += 1) {
+    const secretLetter = document.createElement("li");
+    secretLetter.classList.add("secret__letter");
+    secretLetter.append("_");
+    secret.append(secretLetter);
+  }
+
+  const hint = document.querySelector(".hint");
+  hint.innerText = "";
+  hint.append(`Hint: ${window.currentPair.hint}`);
+
+  document.body.classList.toggle("overflow-body");
+}
+
+function createModal(winLose) {
+  const modalBack = document.createElement("div");
+  modalBack.classList.add("modal-back");
+
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+
+  const resultMsg = document.createElement("p");
+  resultMsg.classList.add("modal__msg");
+  resultMsg.append("YOU ARE ");
+  const result = document.createElement("span");
+  result.classList.add("modal__result");
+  result.append(winLose);
+  resultMsg.append(result);
+  modal.append(resultMsg);
+
+  const secretWord = document.createElement("p");
+  secretWord.classList.add("modal__secret");
+  secretWord.append("Answer is ");
+  const answer = document.createElement("span");
+  answer.classList.add("modal__answer");
+  answer.append(window.currentPair.answer);
+  secretWord.append(answer);
+  modal.append(secretWord);
+
+  const playAgainBtn = document.createElement("button");
+  playAgainBtn.classList.add("modal__new-btn");
+  playAgainBtn.type = "button";
+  playAgainBtn.append("Play again");
+  playAgainBtn.setAttribute("onclick", `${closeModal.name}()`);
+  modal.append(playAgainBtn);
+
+  modalBack.append(modal);
+
+  document.body.append(modalBack);
 }
 
 function mainLogic(btn) {
@@ -80,10 +173,8 @@ function mainLogic(btn) {
     }
 
     if (window.fails === 6) {
-      const result = document.querySelector(".modal__result");
-      result.innerText = "LOSE";
       document.body.classList.toggle("overflow-body");
-      modalClick.classList.toggle("modal-back_show");
+      createModal("LOSE");
     }
   } else {
     // если угадал, то заменяем андерскор на букву
@@ -99,10 +190,8 @@ function mainLogic(btn) {
 
     // и в случае, если угадал верно, показываем модалку с успехом
     if (window.currentPair.answer === answerUser) {
-      const result = document.querySelector(".modal__result");
-      result.innerText = "WIN!!!";
       document.body.classList.toggle("overflow-body");
-      modalClick.classList.toggle("modal-back_show");
+      createModal("WIN!!!");
     }
   }
 }
@@ -115,64 +204,3 @@ keyboardClick.onclick = (event) => {
 
   if (!button.classList.contains("disable-btn")) mainLogic(button);
 };
-
-function closeModal() {
-  // закрываем модалку
-  modalClick.classList.toggle("modal-back_show");
-
-  window.fails = 0; // обнуляем счетчик ошибок
-  document.querySelector(".guesses__number").innerText = `${window.fails} / 6`;
-
-  // убираем челобрека
-  const head = document.querySelector(".gallows__head");
-  const body = document.querySelector(".gallows__body");
-  const leftArm = document.querySelector(".gallows__left-arm");
-  const rightArm = document.querySelector(".gallows__right-arm");
-  const leftLeg = document.querySelector(".gallows__left-leg");
-  const rightLeg = document.querySelector(".gallows__right-leg");
-
-  if (head !== null) head.remove();
-  if (body !== null) body.remove();
-  if (leftArm !== null) leftArm.remove();
-  if (rightArm !== null) rightArm.remove();
-  if (leftLeg !== null) leftLeg.remove();
-  if (rightLeg !== null) rightLeg.remove();
-
-  // восстанавлием клавиатуру
-  while (document.querySelector(".disable-btn") !== null) {
-    document.querySelector(".disable-btn").classList.toggle("disable-btn");
-  }
-
-  // генерим новый вопрос
-  window.hangmanPairs = window.hangmanPairs.filter(
-    (pair) => pair !== window.currentPair,
-  );
-
-  window.currentPair =
-    window.hangmanPairs[getRandomInteger(0, window.hangmanPairs.length - 1)];
-
-  // меняем подсказку и количество подчеркиваний
-  const secret = document.querySelector(".secret");
-  secret.innerHTML = "";
-
-  for (let i = 0; i < window.currentPair.answer.length; i += 1) {
-    const secretLetter = document.createElement("li");
-    secretLetter.classList.add("secret__letter");
-    secretLetter.append("_");
-    secret.append(secretLetter);
-  }
-
-  const hint = document.querySelector(".hint");
-  hint.innerText = "";
-  hint.append(`Hint: ${window.currentPair.hint}`);
-
-  // меняем ответ в модалке
-  const answer = document.querySelector(".modal__answer");
-  answer.innerHTML = "";
-  answer.append(window.currentPair.answer);
-
-  document.body.classList.toggle("overflow-body");
-}
-
-// дурацкий код из за eslinta !!!!!!!!!! функция у него не используется!!!!!
-modalNewBtnClick.setAttribute("onclick", `${closeModal.name}()`);

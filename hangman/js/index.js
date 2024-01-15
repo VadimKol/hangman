@@ -39,6 +39,46 @@ const hangmanPairs = [
     hint: "How many planets are in our solar system",
     answer: "eight",
   },
+  {
+    hint: "Which operating system does a Google Pixel phone use",
+    answer: "android",
+  },
+  {
+    hint: "Elon Musk is the CEO of which global automotive brand",
+    answer: "tesla",
+  },
+  {
+    hint: "Director Taika Waititi plays which comedic character first introduced in Thor Ragnarok",
+    answer: "korg",
+  },
+  {
+    hint: "Who did John Boyega play in the most recent Star Wars films",
+    answer: "finn",
+  },
+  {
+    hint: "How many fingers do Simpsons characters have",
+    answer: "four",
+  },
+  {
+    hint: "What’s Marge Simpson maiden name",
+    answer: "bouvier",
+  },
+  {
+    hint: "A boxer Muhammed Ali was born in which US state",
+    answer: "kentucky",
+  },
+  {
+    hint: "Hanoi is the capital of which country",
+    answer: "vietnam",
+  },
+  {
+    hint: "Beirut is the capital of which country",
+    answer: "lebanon",
+  },
+  {
+    hint: "In which country would you find the original Legoland",
+    answer: "denmark",
+  },
 ];
 
 window.hangmanPairs = hangmanPairs; // это оч плохой код, исправлю потом может
@@ -53,6 +93,9 @@ function getRandomInteger(min, max) {
 const currentPair = hangmanPairs[getRandomInteger(0, hangmanPairs.length)];
 
 window.currentPair = currentPair;
+
+console.log(`Answer is ${window.currentPair.answer}`);
+
 // это ошибки, когда нажимаем неправильно, глобал счетчик
 window.fails = 0;
 
@@ -152,40 +195,3 @@ game.append(secret);
 game.append(hint);
 game.append(guesses);
 game.append(keyboard);
-
-// модалка
-const modalBack = document.createElement("div");
-modalBack.classList.add("modal-back");
-
-const modal = document.createElement("div");
-modal.classList.add("modal");
-
-const resultMsg = document.createElement("p");
-resultMsg.classList.add("modal__msg");
-resultMsg.append("YOU ARE ");
-const result = document.createElement("span");
-result.classList.add("modal__result");
-result.append("LOSE");
-resultMsg.append(result);
-modal.append(resultMsg);
-
-const secretWord = document.createElement("p");
-secretWord.classList.add("modal__secret");
-secretWord.append("Answer is ");
-const answer = document.createElement("span");
-answer.classList.add("modal__answer");
-answer.append(currentPair.answer);
-secretWord.append(answer);
-modal.append(secretWord);
-
-const playAgainBtn = document.createElement("button");
-playAgainBtn.classList.add("modal__new-btn");
-playAgainBtn.type = "button";
-playAgainBtn.append("Play again");
-// playAgainBtn.setAttribute("onclick", "closeModal()"); // ESLINT!!!!!!!!
-modal.append(playAgainBtn);
-
-modalBack.append(modal);
-
-document.body.append(modalBack);
-// wrapper.append(modalBack);
