@@ -97,6 +97,7 @@ for (let i = 0; i < 26; i += 1) {
   letter.classList.add("grid__item");
   letter.classList.add(`grid__item-${i + 1}`);
   letter.type = "button";
+  letter.tabIndex = "-1";
   letter.append(alhabet[i]);
   keyboard.append(letter);
 }
