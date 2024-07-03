@@ -1,4 +1,4 @@
-import hangmanPairs from "../pairs.json" assert { type: "json" };
+import { hangmanPairs } from "./hangmanPairs.js";
 import { getRandomInteger } from "./helper.js";
 
 window.hangmanPairs = hangmanPairs; // это оч плохой код, исправлю потом может
